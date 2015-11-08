@@ -1,5 +1,7 @@
 
 #include "time.h"
+#include <contiki/core/sys/etimer.h>
+#include <platform_config.h>
 
 extern uint32_t SystemCoreClock;
 
@@ -15,7 +17,14 @@ void sleep_us(uint32_t us) {
   for (i = ((SystemCoreClock / 8000000) * us); i != 0; i--) {}
 }
 
+void HAL_SYSTICK_Callback() {
+  etimer_request_poll();
+}
 
+CCIF unsigned long clock_seconds() {
+  return HAL_GetTick() / 1000;
+}
 
-
-
+clock_time_t clock_time(void) {
+  return HAL_GetTick();
+}

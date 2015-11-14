@@ -1,13 +1,17 @@
 
 #include "debug.h"
+
+#ifdef HAL_UART_MODULE_ENABLED
+
 #include <utils/utils.h>
 #include <stdio.h>
 #include <string.h>
-#include "platform_config.h"
 #include <utils/ringbufferdma.h>
+#ifdef CONTIKI
 #include <contiki/core/sys/process.h>
 
 PROCESS(debug_process, "Debug");
+#endif
 
 #define DEBUG_RX_BUFFER_SIZE 32
 RingBufferDmaU8 debugRxRing;
@@ -18,7 +22,9 @@ __weak void debug_processLine(const char* line);
 void debug_setup() {
   printf("debug_setup\n");
   RingBufferDmaU8_initUSARTRx(&debugRxRing, &DEBUG_UART, debugRxBuffer, DEBUG_RX_BUFFER_SIZE);
+#ifdef CONTIKI
   process_start(&debug_process, NULL);
+#endif
 }
 
 __weak void debug_processLine(const char* line) {
@@ -29,6 +35,7 @@ __weak void debug_processLine(const char* line) {
   printf("> ");
 }
 
+#ifdef CONTIKI
 PROCESS_THREAD(debug_process, ev, data) {
   char line[30];
 
@@ -42,6 +49,15 @@ PROCESS_THREAD(debug_process, ev, data) {
   }
   PROCESS_END();
 }
+#else
+void debug_tick() {
+  char line[30];
+  if(RingBufferDmaU8_readLine(&debugRxRing, line, sizeof(line)) > 0) {
+    strTrimRight(line);
+    debug_processLine(line);
+  }
+}
+#endif
 
 #ifdef __GNUC__
 #  define PUTCHAR_PROTOTYPE int __io_putchar(int ch)
@@ -60,3 +76,5 @@ GETCHAR_PROTOTYPE {
   while(RingBufferDmaU8_available(&debugRxRing) == 0);
   return RingBufferDmaU8_read(&debugRxRing);
 }
+
+#endif

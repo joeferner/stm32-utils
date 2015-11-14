@@ -3,7 +3,11 @@
 #define _RINGBUFFER_DMA_H_
 
 #include <platform_config.h>
+
+#ifdef HAL_DMA_MODULE_ENABLED
+
 #include <stdbool.h>
+#include <stdint.h>
 
 typedef struct {
   uint8_t* buffer;
@@ -16,6 +20,8 @@ void RingBufferDmaU8_initUSARTRx(RingBufferDmaU8* ring, UART_HandleTypeDef* husa
 uint16_t RingBufferDmaU8_available(RingBufferDmaU8* ring);
 bool RingBufferDmaU8_readLine(RingBufferDmaU8* ring, char* line, uint16_t size);
 uint8_t RingBufferDmaU8_read(RingBufferDmaU8* ring);
+
+#endif
 
 #endif
 

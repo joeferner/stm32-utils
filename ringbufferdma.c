@@ -1,5 +1,8 @@
 
 #include "ringbufferdma.h"
+
+#ifdef HAL_DMA_MODULE_ENABLED
+
 #include "utils.h"
 
 void RingBufferDmaU8_initUSARTRx(RingBufferDmaU8* ring, UART_HandleTypeDef* husart, uint8_t* buffer, uint16_t size) {
@@ -47,3 +50,5 @@ uint8_t RingBufferDmaU8_read(RingBufferDmaU8* ring) {
   }
   return ret;
 }
+
+#endif

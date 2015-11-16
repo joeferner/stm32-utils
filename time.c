@@ -1,9 +1,9 @@
 
 #include "time.h"
+#include <platform_config.h>
 #ifdef CONTIKI
 #include <contiki/core/sys/etimer.h>
 #endif
-#include <platform_config.h>
 
 extern uint32_t SystemCoreClock;
 

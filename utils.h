@@ -13,6 +13,9 @@
 #ifndef clamp
 #  define clamp(x, min, max) ( ((x) < (min)) ? (min) : ( ((x) > (max)) ? (max) : (x) ) )
 #endif
+#ifndef testBits
+#  define testBits(x, bits) ( ((x) & (bits)) == (bits) )
+#endif
 
 uint32_t swapEndian(uint32_t val);
 void strTrim(char* str);

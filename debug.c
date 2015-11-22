@@ -40,9 +40,9 @@ PROCESS_THREAD(debug_process, ev, data) {
   char line[30];
 
   PROCESS_BEGIN();
-  while(1) {
+  while (1) {
     PROCESS_PAUSE();
-    if(RingBufferDmaU8_readLine(&debugRxRing, line, sizeof(line)) > 0) {
+    if (RingBufferDmaU8_readLine(&debugRxRing, line, sizeof(line)) > 0) {
       strTrimRight(line);
       debug_processLine(line);
     }
@@ -52,7 +52,7 @@ PROCESS_THREAD(debug_process, ev, data) {
 #else
 void debug_tick() {
   char line[30];
-  if(RingBufferDmaU8_readLine(&debugRxRing, line, sizeof(line)) > 0) {
+  if (RingBufferDmaU8_readLine(&debugRxRing, line, sizeof(line)) > 0) {
     strTrimRight(line);
     debug_processLine(line);
   }
@@ -68,12 +68,12 @@ void debug_tick() {
 #endif /* __GNUC__ */
 
 PUTCHAR_PROTOTYPE {
-  HAL_UART_Transmit(&DEBUG_UART, (uint8_t *)&ch, 1, MAX_TIMEOUT);
+  HAL_UART_Transmit(&DEBUG_UART, (uint8_t*)&ch, 1, MAX_TIMEOUT);
   return ch;
 }
 
 GETCHAR_PROTOTYPE {
-  while(RingBufferDmaU8_available(&debugRxRing) == 0);
+  while (RingBufferDmaU8_available(&debugRxRing) == 0);
   return RingBufferDmaU8_read(&debugRxRing);
 }
 

@@ -12,7 +12,7 @@ typedef long time_t;
 void sleep_ms(uint32_t ms);
 void sleep_us(uint32_t us);
 
-struct tm *gmtime(register const time_t *timer);
+struct tm* gmtime(register const time_t* timer);
 
 #ifdef  __cplusplus
 }

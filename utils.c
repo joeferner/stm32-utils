@@ -11,14 +11,14 @@ uint32_t swapEndian(uint32_t val) {
          | ((val >> 24) & 0x000000ff);
 }
 
-void strTrim(char *str) {
+void strTrim(char* str) {
   strTrimLeft(str);
   strTrimRight(str);
 }
 
-void strTrimLeft(char *str) {
-  char *p = str;
-  char *out = str;
+void strTrimLeft(char* str) {
+  char* p = str;
+  char* out = str;
   while (*p && isWhitespace(*p)) {
     p++;
   }
@@ -27,8 +27,8 @@ void strTrimLeft(char *str) {
   }
 }
 
-void strTrimRight(char *str) {
-  char *p = str + strlen(str) - 1;
+void strTrimRight(char* str) {
+  char* p = str + strlen(str) - 1;
   while (p >= str && isWhitespace(*p)) {
     *p-- = '\0';
   }
@@ -45,10 +45,10 @@ int isWhitespace(char ch) {
   return 0;
 }
 
-char *urlDecode(char *str) {
+char* urlDecode(char* str) {
   char tmp[3];
-  char *in = str;
-  char *out = str;
+  char* in = str;
+  char* out = str;
   while (*in) {
     if (*in == '+') {
       in++;
@@ -69,25 +69,25 @@ char *urlDecode(char *str) {
 
 void printMemory(uint8_t* buffer, uint32_t length) {
   uint8_t col;
-  for(uint32_t offset = 0; offset < length; offset += 16) {
+  for (uint32_t offset = 0; offset < length; offset += 16) {
     printf("%08lX ", offset);
-    for(col = 0; col < 16; col++) {
-      if(offset + col < length) {
-	printf("%02X ", buffer[offset + col]);
+    for (col = 0; col < 16; col++) {
+      if (offset + col < length) {
+        printf("%02X ", buffer[offset + col]);
       } else {
-	printf("   ");
+        printf("   ");
       }
     }
-    for(col = 0; col < 16; col++) {
-      if(offset + col < length) {
-	char ch = buffer[offset + col];
-	if(ch >= '.' && ch <= '~') {
-	  printf("%c", ch);
-	} else {
-	  printf(".");
-	}
+    for (col = 0; col < 16; col++) {
+      if (offset + col < length) {
+        char ch = buffer[offset + col];
+        if (ch >= '.' && ch <= '~') {
+          printf("%c", ch);
+        } else {
+          printf(".");
+        }
       } else {
-	printf(" ");
+        printf(" ");
       }
     }
     printf("\n");

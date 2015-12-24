@@ -1,5 +1,5 @@
 
-#include "trig_int16.h"
+#include "math.h"
 #include <stdlib.h>
 
 /**
@@ -100,4 +100,11 @@ uint16_t trig_int16_atan2deg(int16_t y, int16_t x) {
   }
 
   return degree;
+}
+
+int16_t smallestDeltaBetweenAnglesInDegrees(int32_t source, int32_t target) {
+  int16_t a;
+  a = target - source;
+  a += (a > 180) ? -360 : (a < -180) ? 360 : 0;
+  return a;
 }

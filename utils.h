@@ -17,6 +17,27 @@
 #  define testBits(x, bits) ( ((x) & (bits)) == (bits) )
 #endif
 
+#ifdef UTILS_DEBUG
+#define UTILS_DEBUG_OUT(format, ...) printf("%s:%d: " format, __FILE__, __LINE__, ##__VA_ARGS__)
+#else
+#define UTILS_DEBUG_OUT(format, ...)
+#endif
+
+#define returnNonOKHALStatus(fn) {  \
+  HAL_StatusTypeDef status = fn;    \
+  if (status != HAL_OK) {           \
+    return status;                  \
+  }                                 \
+}
+
+#define assertNonOKHALStatus(fn) {  \
+  HAL_StatusTypeDef status = fn;    \
+  if (status != HAL_OK) {           \
+    UTILS_DEBUG_OUT("assert %d\n", status); \
+    while(1);                       \
+  }                                 \
+}
+
 uint32_t swapEndian(uint32_t val);
 void strTrim(char* str);
 void strTrimLeft(char* str);

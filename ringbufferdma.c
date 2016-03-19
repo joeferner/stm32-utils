@@ -14,7 +14,12 @@ void RingBufferDmaU8_initUSARTRx(RingBufferDmaU8* ring, UART_HandleTypeDef* husa
 }
 
 uint16_t RingBufferDmaU8_available(RingBufferDmaU8* ring) {
-  uint8_t const* head = ring->buffer + ring->size - ring->dmaHandle->Instance->CNDTR;
+#ifdef __HAL_DMA_GET_COUNTER
+  uint32_t leftToTransfer = __HAL_DMA_GET_COUNTER(ring->dmaHandle);
+#else
+  uint32_t leftToTransfer = ring->dmaHandle->Instance->CNDTR;
+#endif
+  uint8_t const* head = ring->buffer + ring->size - leftToTransfer;
   uint8_t const* tail = ring->tailPtr;
   if (head >= tail) {
     return head - tail;

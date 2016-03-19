@@ -20,7 +20,6 @@ uint8_t debugRxBuffer[DEBUG_RX_BUFFER_SIZE];
 __weak void debug_processLine(const char* line);
 
 void debug_setup() {
-  printf("debug_setup\n");
   RingBufferDmaU8_initUSARTRx(&debugRxRing, &DEBUG_UART, debugRxBuffer, DEBUG_RX_BUFFER_SIZE);
 #ifdef CONTIKI
   process_start(&debug_process, NULL);

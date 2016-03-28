@@ -10,9 +10,9 @@
 #include <stdint.h>
 
 typedef struct {
-  uint8_t* buffer;
+  volatile uint8_t* buffer;
   uint16_t size;
-  uint8_t* tailPtr;
+  volatile uint8_t* tailPtr;
   DMA_HandleTypeDef* dmaHandle;
 } RingBufferDmaU8;
 

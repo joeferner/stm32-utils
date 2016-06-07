@@ -93,4 +93,3 @@ void printMemory(uint8_t* buffer, uint32_t length) {
     printf("\n");
   }
 }
-

@@ -6,7 +6,7 @@
 int tests_run;
 
 static char* all_tests();
-static char* math_test();
+extern char* math_test();
 
 int main(int argc, char* argv[]) {
   printf("-------- BEGIN TEST --------\n");

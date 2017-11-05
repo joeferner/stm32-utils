@@ -1,12 +1,10 @@
 
 #include "debug.h"
 
-#ifdef HAL_UART_MODULE_ENABLED
-
-#include <utils/utils.h>
+#include "include/utils.h"
 #include <stdio.h>
 #include <string.h>
-#include <utils/ringbufferdma.h>
+#include "include/ringbufferdma.h"
 #ifdef CONTIKI
 #include <contiki/core/sys/process.h>
 
@@ -67,7 +65,7 @@ void debug_tick() {
 #endif /* __GNUC__ */
 
 PUTCHAR_PROTOTYPE {
-  HAL_UART_Transmit(&DEBUG_UART, (uint8_t*)&ch, 1, MAX_TIMEOUT);
+  HAL_UART_Transmit(&DEBUG_UART, (uint8_t*)&ch, 1, DEBUG_TIMEOUT);
   return ch;
 }
 
@@ -75,5 +73,3 @@ GETCHAR_PROTOTYPE {
   while (RingBufferDmaU8_available(&debugRxRing) == 0);
   return RingBufferDmaU8_read(&debugRxRing);
 }
-
-#endif

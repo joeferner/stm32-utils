@@ -1,6 +1,7 @@
 
 #include "timer.h"
-#include <platform_config.h>
+
+extern uint32_t HAL_GetTick();
 
 void periodicTimer_setup(PeriodicTimer* timer, uint32_t intervalMs) {
   timer->nextTick = HAL_GetTick() + intervalMs;

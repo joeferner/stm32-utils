@@ -2,12 +2,9 @@
 #ifndef _RINGBUFFER_DMA_H_
 #define _RINGBUFFER_DMA_H_
 
-#include <platform_config.h>
-
-#ifdef HAL_DMA_MODULE_ENABLED
-
 #include <stdbool.h>
 #include <stdint.h>
+#include <pinout.h>
 
 typedef struct {
   volatile uint8_t* buffer;
@@ -22,6 +19,3 @@ bool RingBufferDmaU8_readLine(RingBufferDmaU8* ring, char* line, uint16_t size);
 uint8_t RingBufferDmaU8_read(RingBufferDmaU8* ring);
 
 #endif
-
-#endif
-

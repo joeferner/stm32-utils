@@ -4,7 +4,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
-#include <pinout.h>
+#include <platform.h>
 
 typedef struct {
   volatile uint8_t* buffer;

@@ -2,7 +2,7 @@
    Files in the C namespace (ie those that do not start with an
    underscore) go in .c.  */
 
-#include <_ansi.h>
+//#include <_ansi.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/fcntl.h>
@@ -12,14 +12,13 @@
 #include <sys/time.h>
 #include <sys/times.h>
 #include <errno.h>
-#include <reent.h>
+//#include <reent.h>
 #include <unistd.h>
 #include <sys/wait.h>
 
 #undef errno
 extern int errno;
 
-#define FreeRTOS
 #define MAX_STACK_SIZE 0x2000
 
 extern int __io_putchar(int ch) __attribute__((weak));

@@ -2,8 +2,7 @@
 #ifndef _DEBUG_H_
 #define _DEBUG_H_
 
-#include <sdkconfig.h>
-#include <pinout.h>
+#include <platform.h>
 
 #define DEBUG_TIMEOUT 1000
 

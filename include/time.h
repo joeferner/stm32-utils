@@ -2,12 +2,11 @@
 #define _STM32LIB_TIME_H
 
 #include <stdint.h>
+#include <sys/_timeval.h>
 
 #ifdef  __cplusplus
 extern "C" {
 #endif
-
-typedef long time_t;
 
 void sleep_ms(uint32_t ms);
 void sleep_us(uint32_t us);
